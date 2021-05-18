@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void GoodStudent::SolveEquations(vector<QuadricEquation>& tasks, list<Solution>& ans) {
+void GoodStudent::SolveEquations(const vector<QuadricEquation>& tasks, list<Solution>& ans) {
 	if (tasks.empty())
 		return;
 
@@ -16,15 +16,14 @@ void GoodStudent::SolveEquations(vector<QuadricEquation>& tasks, list<Solution>&
 	}
 }
 
-void NormalStudent::SolveEquations(vector<QuadricEquation>& tasks, list<Solution>& ans) {
+void NormalStudent::SolveEquations(const vector<QuadricEquation>& tasks, list<Solution>& ans) {
 	if (tasks.empty())
 		return;
 
-	int chance = 63; //persent of correct answers
 	Roots r;
 
 	for (int i = 0; i < tasks.size(); i++) {
-		if ((rand() % 100) < chance)
+		if ((rand() % 100) < m_errorChance)
 			r = tasks[i].FindRoots();
 		else
 			r = { 2, 0, 1 };
@@ -34,7 +33,7 @@ void NormalStudent::SolveEquations(vector<QuadricEquation>& tasks, list<Solution
 	}
 }
 
-void BadStudent::SolveEquations(vector<QuadricEquation>& tasks, list<Solution>& ans) {
+void BadStudent::SolveEquations(const vector<QuadricEquation>& tasks, list<Solution>& ans) {
 	if (tasks.empty())
 		return;
 
