@@ -9,8 +9,9 @@ private:
 	map<string, int> results;
 public:
 	list <Solution> answers;
-	Teacher(string _name, vector<QuadricEquation>& tasks);
-	void SolveEquations(vector<QuadricEquation>& tasks, list<Solution>& ans);
+	Teacher(string _name, const vector<QuadricEquation>& tasks);
+	void SolveEquations(const vector<QuadricEquation>& tasks, list<Solution>& ans) override;
 	void CheckAnswers();
-	void CrateTable();
+	void CrateTable() const;
 };
+
