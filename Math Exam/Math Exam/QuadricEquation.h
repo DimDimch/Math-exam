@@ -29,9 +29,9 @@ public:
 	friend bool operator==(const QuadricEquation& x, const QuadricEquation& y) {
 		return x.a == y.a && x.b == y.b && x.c == y.c;
 	}
-	Roots FindRoots();
+	Roots FindRoots() const;
 private:
-	double FindDiscriminant() {
+	double FindDiscriminant() const {
 		return (a * b - 4.0 * a * c);
 	}
 };
