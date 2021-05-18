@@ -1,7 +1,7 @@
 #include "QuadricEquation.h"
 #include <cmath>
 
-Roots QuadricEquation::FindRoots() {
+Roots QuadricEquation::FindRoots()  const {
 	double D = FindDiscriminant();
 	Roots roots = { 0,0,0 };
 
