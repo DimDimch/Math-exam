@@ -48,11 +48,3 @@ void Teacher::CrateTable() const {
 		cout << i->first << "\t\t|   " << i->second << endl;
 	}
 }
-
-void Teacher::CrateTable() {
-	cout << "   Ïðåïîäàâàòåëü: " << name << "\n\n";
-	cout << "    Ñòóäåíòû:\t\t  Áàëëû:\n";
-	for (auto i = results.begin(); i != results.end(); ++i) {
-		cout << i->first << "\t\t|   " << i->second << endl;
-	}
-}
