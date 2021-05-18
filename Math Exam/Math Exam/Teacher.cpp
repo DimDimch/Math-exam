@@ -1,11 +1,11 @@
 #include "Teacher.h"
 #include <iostream>
 
-Teacher::Teacher(string _name, vector<QuadricEquation>& tasks) : Human(_name) {
+Teacher::Teacher(string _name, const vector<QuadricEquation>& tasks) : Human(_name) {
 	SolveEquations(tasks, correctAnswers);
 }
 
-void Teacher::SolveEquations(vector<QuadricEquation>& tasks, list<Solution>& ans) {
+void Teacher::SolveEquations(const vector<QuadricEquation>& tasks, list<Solution>& ans) {
 	if (tasks.empty())
 		return;
 
@@ -16,27 +16,42 @@ void Teacher::SolveEquations(vector<QuadricEquation>& tasks, list<Solution>& ans
 	}
 }
 
+bool CheckCurAnswer(const list<Solution>& correctAnswers, const Solution& ans) {
+	for (auto res = correctAnswers.begin(); res != correctAnswers.end(); ++res) {
+		if (res->task == ans.task) {
+			if (res->answer == ans.answer) {
+				return true;
+			}
+			return false;
+		}
+	}
+	return false;
+}
 void Teacher::CheckAnswers() {
-	//for correct answers
+	bool check;
 	for (auto ans = answers.begin(); ans != answers.end();) {
 		results[ans->name];
-		for (auto res = correctAnswers.begin(); res != correctAnswers.end(); ++res) {
-			if (res->task == ans->task) {
-				if (res->answer == ans->answer) {
-					results[ans->name] += 1;
-				}
-				auto temp = ans;
-				++ans;
-				answers.erase(temp);
-				break;
-			}
+		check = CheckCurAnswer(correctAnswers, *ans);
+		if (check == true) {
+			results[ans->name] += 1;
 		}
+		auto temp = ans;
+		++ans;
+		answers.erase(temp);
+	}
+}
+
+void Teacher::CrateTable() const {
+	cout << "   Преподаватель: " << name << "\n\n";
+	cout << "    Студенты:\t\t  Баллы:\n";
+	for (auto i = results.begin(); i != results.end(); ++i) {
+		cout << i->first << "\t\t|   " << i->second << endl;
 	}
 }
 
 void Teacher::CrateTable() {
-	cout << "   �������������: " << name << "\n\n";
-	cout << "    ��������:\t\t  �����:\n";
+	cout << "   Ïðåïîäàâàòåëü: " << name << "\n\n";
+	cout << "    Ñòóäåíòû:\t\t  Áàëëû:\n";
 	for (auto i = results.begin(); i != results.end(); ++i) {
 		cout << i->first << "\t\t|   " << i->second << endl;
 	}
